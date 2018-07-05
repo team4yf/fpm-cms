@@ -1,0 +1,37 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
+
+.panel{
+  padding: 8px;
+  margin: 4px;
+  border: 1px solid #eee;
+}
+.panel .panel-icon{
+  font-size: 12px;
+}
+.panel-title{
+  margin: 5px 0;
+}
+.size-12{
+  font-size: 12px;
+}
+.color-gray{
+  color: #aaa;
+}
+.bgcolor-gray{
+  background-color: #aaa;
+}
+.float-right, .fr{
+  float: right;
+}
+main{
+  padding: 20px;
+}
+a, a:hover {
+  display: inline-block;
+  
+  text-decoration: none;
+}
