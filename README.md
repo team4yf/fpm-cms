@@ -1,9 +1,21 @@
 # FPM-CMS
+A CMS System For FPM.
 
-Proptype: [https://modao.cc/app/QVQaMYO4sdMe67xc9rJHRJDhZYLDEE5](https://modao.cc/app/QVQaMYO4sdMe67xc9rJHRJDhZYLDEE5)
+### Functions
+- [ ] Write Posts/Pages
+- [ ] Make A Site Setting
+- [ ] Extend DataMeta
 
-## Stack
+### Snapshots
+- [ ] ..
+
+### Prototype
+- [ ] At Modao.cc
+  - [https://modao.cc/app/QVQaMYO4sdMe67xc9rJHRJDhZYLDEE5](https://modao.cc/app/QVQaMYO4sdMe67xc9rJHRJDhZYLDEE5)
+
+### Dev Stack
 
 - [ ] React
 - [ ] React-router-dom
-- [ ] Element-React
+- [ ] Element-React 
+  - [ ] Docs: [https://elemefe.github.io/element-react/#/zh-CN/layout](https://elemefe.github.io/element-react/#/zh-CN/layout)

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './App.css'
 import logo from './logo.svg';
 import { Menu, Layout } from 'element-react';
 import { Link } from 'react-router-dom';
@@ -10,7 +11,7 @@ class App extends Component {
       <div>
       <Layout.Row className="tac">
         <nav>
-          <Menu theme="dark" defaultActive="1" className="el-menu-demo" mode="horizontal" onSelect={this.onSelect.bind(this)}>
+          <Menu theme="dark" defaultActive="1" className="el-menu-demo" mode="horizontal">
             <Menu.Item index="0"><img style={{ height: '40px' }} src={logo} /></Menu.Item>
             <Menu.Item index="1"><Link to="/dashboard">Dashboard</Link></Menu.Item>
             <Menu.SubMenu index="2" title="Post">
@@ -20,10 +21,10 @@ class App extends Component {
               <Menu.Item index="2-3">Trashed</Menu.Item>
             </Menu.SubMenu>
             <Menu.Item index="3">Page</Menu.Item>
-            <Menu.Item index="4">Category</Menu.Item>
-            <Menu.Item index="5">Tag</Menu.Item>
-            <Menu.Item index="5">DataMeta</Menu.Item>
-            <Menu.Item index="6">Setting</Menu.Item>
+            <Menu.Item index="4"><Link to="/category">Category</Link></Menu.Item>
+            <Menu.Item index="5"><Link to="/tags">Tag</Link></Menu.Item>
+            <Menu.Item index="6"><Link to="/datameta">DataMeta</Link></Menu.Item>
+            <Menu.Item index="7"><Link to="/setting">Setting</Link></Menu.Item>
           </Menu>
         </nav>
       </Layout.Row>
@@ -31,18 +32,6 @@ class App extends Component {
       </div>
     )
   }
-
-  onSelect() {
-    
-    }
-
-  onOpen() {
-    
-    }
-    
-    onClose() {
-    
-    }
 }
 
 export default App;

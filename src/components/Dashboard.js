@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import { Layout, Card, Icon } from 'element-react';
+import { Layout, Card, Icon, Breadcrumb } from 'element-react';
 
 class Dashboard extends Component {
     render () {
       return (
         <div>
           <Layout.Row gutter="20">
-            <Layout.Col span="24">
-                <h3>Dashboard</h3>
-            </Layout.Col>
+            <div>
+              <Breadcrumb separator="/" className="breadcrumb">
+                <Breadcrumb.Item>Home</Breadcrumb.Item>
+                <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
+              </Breadcrumb>
+            </div>
             <Layout.Col span="8">
               <div className="grid-content bg-purple">
                 <div className="panel">

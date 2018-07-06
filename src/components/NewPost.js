@@ -1,6 +1,85 @@
 import React, { Component } from 'react';
-import { Layout, Card, Icon, Form, Select, Switch, Checkbox, Button, Input, Radio, DatePicker, TimePicker,
-  Upload, Dialog } from 'element-react';
+import { Layout, Icon, Form, Select, Switch, Checkbox, Button, Input, Radio,
+  Tag,
+  Upload, Dialog, Breadcrumb } from 'element-react';
+
+class Tags extends Component{
+  constructor(props) {
+    super(props);
+  
+    this.state = {
+      dynamicTags: ['TagA', 'TagB', 'TagA'],
+      inputVisible: false,
+      inputValue: ''
+    }
+  }
+  
+  onKeyUp(e) {
+    if (e.keyCode === 13) {
+      this.handleInputConfirm();
+    }
+  }
+  
+  onChange(value) {
+    this.setState({ inputValue: value });
+  }
+  
+  handleClose(index) {
+    this.state.dynamicTags.splice(index, 1);
+    this.forceUpdate();
+  }
+  
+  showInput() {
+    this.setState({ inputVisible: true }, () => {
+      this.refs.saveTagInput.focus();
+    });
+  }
+  
+  handleInputConfirm() {
+    let inputValue = this.state.inputValue;
+  
+    if (inputValue) {
+      this.state.dynamicTags.push(inputValue);
+    }
+  
+    this.state.inputVisible = false;
+    this.state.inputValue = '';
+  
+    this.forceUpdate();
+  }
+  
+  render() {
+    return (
+      <div>
+        {
+          this.state.dynamicTags.map((tag, index) => {
+            return (
+              <Tag
+                className="tag"
+                key={Math.random()}
+                closable={true}
+                closeTransition={false}
+                onClose={this.handleClose.bind(this, index)}>{tag}</Tag>
+            )
+          })
+        }
+        {
+          this.state.inputVisible ? (
+            <Input
+              className="input-new-tag"
+              value={this.state.inputValue}
+              ref="saveTagInput"
+              size="mini"
+              onChange={this.onChange.bind(this)}
+              onKeyUp={this.onKeyUp.bind(this)}
+              onBlur={this.handleInputConfirm.bind(this)}
+            />
+          ) : <Button className="button-new-tag" size="small" onClick={this.showInput.bind(this)}>+ New Tag</Button>
+        }
+      </div>
+    )
+  }
+}
 
 class NewPost extends Component {
   constructor(props) {
@@ -10,14 +89,6 @@ class NewPost extends Component {
       dialogImageUrl: '',
       dialogVisible: false,
       form: {
-        name: '',
-        region: '',
-        date1: null,
-        date2: null,
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
       }
     };
   }
@@ -46,10 +117,17 @@ class NewPost extends Component {
     const { dialogImageUrl, dialogVisible } = this.state;
     return (
       <Layout.Row>
+        <div>
+          <Breadcrumb separator="/" className="breadcrumb">
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item>Post</Breadcrumb.Item>
+            <Breadcrumb.Item>New</Breadcrumb.Item>
+          </Breadcrumb>
+        </div>
         <Layout.Col span="24">
           <h3>New Post</h3>
         </Layout.Col>
-        <Layout.Col span="16">
+        <Layout.Col span="12">
           <Form model={this.state.form} labelWidth="80" onSubmit={this.onSubmit.bind(this)}>
             <Form.Item label="URL:">
               <Input value={this.state.form.url} onChange={this.onChange.bind(this, 'url')}></Input>
@@ -58,19 +136,19 @@ class NewPost extends Component {
               <Input value={this.state.form.title} onChange={this.onChange.bind(this, 'title')}></Input>
             </Form.Item>
             <Form.Item label="Keyword:">
-              <Input value={this.state.form.name} onChange={this.onChange.bind(this, 'name')}></Input>
+              <Input value={this.state.form.keyword} onChange={this.onChange.bind(this, 'keyword')}></Input>
             </Form.Item>
-            <Form.Item label="Descrip:">
-              <Input value={this.state.form.name} onChange={this.onChange.bind(this, 'name')}></Input>
+            <Form.Item label="Summary:">
+              <Input value={this.state.form.summary} onChange={this.onChange.bind(this, 'summary')}></Input>
             </Form.Item>
             <Form.Item label="Category:">
-              <Select value={this.state.form.region} placeholder="Unrecgnized">
-                <Select.Option label="Unrecgnized" value="Unrecgnized"></Select.Option>
-                <Select.Option label="Blog" value="Blog"></Select.Option>
+              <Select value={this.state.form.category} placeholder="Unrecgnized">
+                <Select.Option label="Unrecgnized" value="1"></Select.Option>
+                <Select.Option label="Blog" value="2"></Select.Option>
               </Select>
             </Form.Item>
             <Form.Item label="Tags:">
-              <Input value={this.state.form.name} onChange={this.onChange.bind(this, 'name')}></Input>
+              <Tags />
             </Form.Item>
             <Form.Item label="Cover:">
             <div>
@@ -92,11 +170,11 @@ class NewPost extends Component {
             </div>
             </Form.Item>
             <Form.Item label="Content:">
-              <Input value={this.state.form.name} onChange={this.onChange.bind(this, 'name')}></Input>
+              <Input type="textarea" rows="10" value={this.state.form.content} onChange={this.onChange.bind(this, 'content')}></Input>
             </Form.Item>
             <Form.Item>
-              <Button type="primary" nativeType="submit">立即创建</Button>
-              <Button>取消</Button>
+              <Button type="primary" nativeType="submit">Post Now</Button>
+              <Button>Cancel</Button>
             </Form.Item>
           </Form>
         </Layout.Col>
