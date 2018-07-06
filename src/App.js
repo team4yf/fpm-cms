@@ -20,7 +20,7 @@ class App extends Component {
               <Menu.Item index="2-3">Draft</Menu.Item>
               <Menu.Item index="2-3">Trashed</Menu.Item>
             </Menu.SubMenu>
-            <Menu.Item index="3">Page</Menu.Item>
+            <Menu.Item index="3"><Link to="/pages">Page</Link></Menu.Item>
             <Menu.Item index="4"><Link to="/category">Category</Link></Menu.Item>
             <Menu.Item index="5"><Link to="/tags">Tag</Link></Menu.Item>
             <Menu.Item index="6"><Link to="/datameta">DataMeta</Link></Menu.Item>

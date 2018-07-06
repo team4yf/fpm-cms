@@ -27,6 +27,15 @@ body {
 .float-right, .fr{
   float: right;
 }
+.float-left, .fl{
+  float: left;
+}
+.cf, .cf:after{
+  clear: both;
+}
+.margin-top-10{
+  margin-top: 10px;
+}
 main{
   padding: 20px;
 }
