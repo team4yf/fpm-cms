@@ -16,9 +16,9 @@ class App extends Component {
             <Menu.Item index="1"><Link to="/dashboard">Dashboard</Link></Menu.Item>
             <Menu.SubMenu index="2" title="Post">
               <Menu.Item index="2-1"><Link to="/newpost">New</Link></Menu.Item>
-              <Menu.Item index="2-2">Published</Menu.Item>
-              <Menu.Item index="2-3">Draft</Menu.Item>
-              <Menu.Item index="2-3">Trashed</Menu.Item>
+              <Menu.Item index="2-2"><Link to="/posts/published">Published</Link></Menu.Item>
+              <Menu.Item index="2-3"><Link to="/posts/draft">Draft</Link></Menu.Item>
+              <Menu.Item index="2-3"><Link to="/posts/trashed">Trashed</Link></Menu.Item>
             </Menu.SubMenu>
             <Menu.Item index="3"><Link to="/pages">Page</Link></Menu.Item>
             <Menu.Item index="4"><Link to="/category">Category</Link></Menu.Item>

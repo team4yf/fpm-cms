@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Layout, Card, Icon, Breadcrumb, Tag, Table, Button, Pagination, Input } from 'element-react';
 
-class Datameta extends Component {
+class Posts extends Component {
   constructor(props) {
     super(props);
   
@@ -13,33 +12,55 @@ class Datameta extends Component {
           prop: 'id',
         },
         {
-          label: "Data",
-          prop: "data",
+          label: "Title",
+          prop: "title",
           width: 180
         },
         {
-          label: "Manager",
-          render: function(record, dom, index){
-            return (
-              <Link to={ `/datameta/edit/${record.id}` }>Click Me</Link>
-            )
-          }
+          label: "Category",
+          prop: "category",
         },
         {
-            label: '-',
-            render: function(){
-                return (
-                <span>
-                    <Button plain={true} type="info" size="mini">Edit</Button>
-                    <Button type="danger" size="mini">Remove</Button>
-                </span>
-                )
-            }
+          label: "Author",
+          prop: "author"
+        },
+        {
+          label: "Viewers",
+          prop: "viewers"
+        },
+        {
+          label: "Comments",
+          prop: "comments"
+        },
+        {
+          label: "State",
+          prop: "state"
+        },
+        {
+          label: "PublishAt",
+          prop: "publishat"
+        },
+        {
+          label: '-',
+          render: function(){
+            return (
+              <span>
+               <Button plain={true} type="info" size="mini">Edit</Button>
+               <Button type="danger" size="mini">Remove</Button>
+              </span>
+            )
+          }
         }
       ],
       data: [{
         id: 100,
-        data: 'Post',
+        title: 'hello world',
+        category: 'Blog',
+        author: 'Wangfan',
+        viewers: 100,
+        comments: 200,
+        state: 'published',
+        publishat: '2016-05-02',
       }]
     }
   }
@@ -50,12 +71,13 @@ class Datameta extends Component {
         <div>
           <Breadcrumb separator="/" className="breadcrumb">
             <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>Datameta</Breadcrumb.Item>
+            <Breadcrumb.Item>Posts</Breadcrumb.Item>
           </Breadcrumb>
         </div>
         <Layout.Col span="24">
           <div className="fl">
             <Button type="success" size="mini">New</Button> 
+            <Button type="text">Published</Button> |<Button type="text">Drafts</Button> |<Button type="text">Trashed</Button>
           </div>
           <div className="fr">
             <Input
@@ -80,4 +102,4 @@ class Datameta extends Component {
   
 }
   
-export default Datameta;
+export default Posts;

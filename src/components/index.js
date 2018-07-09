@@ -4,7 +4,8 @@ import Tags from './Tags';
 import Category from './Category';
 import Setting from './Setting';
 import Pages from './Pages';
+import Posts from './Posts';
 
 import { Datameta, DatametaEdit } from './datameta';
 
-export { Dashboard, NewPost, Tags, Category, Setting, Pages, Datameta, DatametaEdit };
+export { Dashboard, NewPost, Tags, Category, Setting, Pages, Posts, Datameta, DatametaEdit };
