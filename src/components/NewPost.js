@@ -170,7 +170,9 @@ class NewPost extends Component {
             </div>
             </Form.Item>
             <Form.Item label="Content:">
-              <Input type="textarea" rows="10" value={this.state.form.content} onChange={this.onChange.bind(this, 'content')}></Input>
+              <Input type="textarea" rows={10}
+              value={this.state.form.contoent}
+                value={this.state.form.content} onChange={this.onChange.bind(this, 'content')}></Input>
             </Form.Item>
             <Form.Item>
               <Button type="primary" nativeType="submit">Post Now</Button>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
 import { Layout, Card, Icon } from 'element-react';
-import { Dashboard, NewPost, Tags, Category, Setting, Pages, Posts, Datameta, DatametaEdit } from './components';
+import { Dashboard, NewPost, Tags, Category, Setting, Pages, Posts, Datameta, DatametaEdit, Comments } from './components';
 
 const Main = () => (
   <main>
@@ -17,6 +17,7 @@ const Main = () => (
       <Route path='/posts/:state' component={Posts}/>
       <Route exact path='/datameta' component={Datameta}/>
       <Route path='/datameta/edit/:id' component={DatametaEdit}/>
+      <Route exact path='/comments' component={Comments}/>
     </Switch>
   </main>
 )

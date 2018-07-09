@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Layout, Card, Icon, Breadcrumb, Tag, Table, Button, Pagination, Input } from 'element-react';
 
-class Posts extends Component {
+class Comments extends Component {
   constructor(props) {
     super(props);
   
@@ -72,13 +71,12 @@ class Posts extends Component {
         <div>
           <Breadcrumb separator="/" className="breadcrumb">
             <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>Posts</Breadcrumb.Item>
+            <Breadcrumb.Item>Comments</Breadcrumb.Item>
           </Breadcrumb>
         </div>
         <Layout.Col span="24">
           <div className="fl">
-            <Button type="success" size="mini"><Link to="/newpost">New</Link></Button> 
-            <Button type="text">Published</Button> |<Button type="text">Drafts</Button> |<Button type="text">Trashed</Button>
+            <Button type="text">All</Button> |<Button type="text">Approved</Button> |<Button type="text">Trashed</Button>
           </div>
           <div className="fr">
             <Input
@@ -103,4 +101,4 @@ class Posts extends Component {
   
 }
   
-export default Posts;
+export default Comments;
