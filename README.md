@@ -44,3 +44,7 @@ A CMS System For FPM.
     - [ ] Get list of the api, filter by `category, tag, author, state, title, content, url, id` ... , order by `viewers, newest, comments` ... .
     - [ ] Fields as `next page, prev page`
 
+
+### TODO:
+- [ ] upload
+- [ ] ricktext
