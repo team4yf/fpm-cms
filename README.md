@@ -6,6 +6,32 @@ A CMS System For FPM.
 - [ ] Make A Site Setting
 - [ ] Extend DataMeta
 
+### RoadMap
+- v0.0.1
+  - [ ] Write Post
+  - [ ] Edit Setting
+  - [ ] Dashboard
+
+- v0.0.2
+  - [ ] RichEditor
+  - [ ] Write Page
+
+- v0.0.3
+  - [ ] Tags
+  - [ ] Categorys
+
+- v0.0.4
+  - [ ] Comments
+
+- v0.0.5
+  - [ ] Metadata
+
+- v0.1.0
+  - [ ] Add fpmc
+
+### Changelog
+
+
 ### Snapshots
 - [ ] ..
 
@@ -47,4 +73,5 @@ A CMS System For FPM.
 
 ### TODO:
 - [ ] upload
-- [ ] ricktext
+- [ ] richtext editor
+- [ ] mock server
