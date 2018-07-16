@@ -1,85 +1,15 @@
 import React, { Component } from 'react';
-import { Layout, Icon, Form, Select, Switch, Checkbox, Button, Input, Radio,
-  Tag,
-  Upload, Dialog, Breadcrumb } from 'element-react';
-
-class Tags extends Component{
-  constructor(props) {
-    super(props);
-  
-    this.state = {
-      dynamicTags: ['TagA', 'TagB', 'TagA'],
-      inputVisible: false,
-      inputValue: ''
-    }
-  }
-  
-  onKeyUp(e) {
-    if (e.keyCode === 13) {
-      this.handleInputConfirm();
-    }
-  }
-  
-  onChange(value) {
-    this.setState({ inputValue: value });
-  }
-  
-  handleClose(index) {
-    this.state.dynamicTags.splice(index, 1);
-    this.forceUpdate();
-  }
-  
-  showInput() {
-    this.setState({ inputVisible: true }, () => {
-      this.refs.saveTagInput.focus();
-    });
-  }
-  
-  handleInputConfirm() {
-    let inputValue = this.state.inputValue;
-  
-    if (inputValue) {
-      this.state.dynamicTags.push(inputValue);
-    }
-  
-    this.state.inputVisible = false;
-    this.state.inputValue = '';
-  
-    this.forceUpdate();
-  }
-  
-  render() {
-    return (
-      <div>
-        {
-          this.state.dynamicTags.map((tag, index) => {
-            return (
-              <Tag
-                className="tag"
-                key={Math.random()}
-                closable={true}
-                closeTransition={false}
-                onClose={this.handleClose.bind(this, index)}>{tag}</Tag>
-            )
-          })
-        }
-        {
-          this.state.inputVisible ? (
-            <Input
-              className="input-new-tag"
-              value={this.state.inputValue}
-              ref="saveTagInput"
-              size="mini"
-              onChange={this.onChange.bind(this)}
-              onKeyUp={this.onKeyUp.bind(this)}
-              onBlur={this.handleInputConfirm.bind(this)}
-            />
-          ) : <Button className="button-new-tag" size="small" onClick={this.showInput.bind(this)}>+ New Tag</Button>
-        }
-      </div>
-    )
-  }
-}
+import { 
+  Layout, 
+  Icon, 
+  Form, 
+  Select,
+  Button, 
+  Input,  
+  Breadcrumb,
+  Message, 
+} from 'element-react';
+import { Tag, Upload } from './input';
 
 class NewPost extends Component {
   constructor(props) {
@@ -88,33 +18,35 @@ class NewPost extends Component {
     this.state = {
       dialogImageUrl: '',
       dialogVisible: false,
-      form: {
+      form: { 
+        url: '/post/1',
+        title: 'UnTitled',
+        category: '2',
+        tags: 'Tag A, Tag DDDD'.split(','),
+        cover: [
+          {name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg'}, 
+          {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg'},
+        ]
       }
     };
   }
   
   onSubmit(e) {
     e.preventDefault();
+    console.info(this.state.form)
+    //TODO: validate & save data to remote
+    Message({
+      message: 'Create Success',
+      type: 'success'
+    });
   }
   
   onChange(key, value) {
     this.state.form[key] = value;
     this.forceUpdate();
   }
-  
-  handleRemove(file, fileList) {
-    console.log(file, fileList);
-  }
-  
-  handlePictureCardPreview(file) {
-    this.setState({
-      dialogImageUrl: file.url,
-      dialogVisible: true,
-    })
-  }
 
   render() {
-    const { dialogImageUrl, dialogVisible } = this.state;
     return (
       <Layout.Row>
         <div>
@@ -130,7 +62,7 @@ class NewPost extends Component {
         <Layout.Col span="12">
           <Form model={this.state.form} labelWidth="80" onSubmit={this.onSubmit.bind(this)}>
             <Form.Item label="URL:">
-              <Input value={this.state.form.url} onChange={this.onChange.bind(this, 'url')}></Input>
+              <Input value={this.state.form.url} disabled></Input>
             </Form.Item>
             <Form.Item label="Title:">
               <Input value={this.state.form.title} onChange={this.onChange.bind(this, 'title')}></Input>
@@ -138,40 +70,29 @@ class NewPost extends Component {
             <Form.Item label="Keyword:">
               <Input value={this.state.form.keyword} onChange={this.onChange.bind(this, 'keyword')}></Input>
             </Form.Item>
-            <Form.Item label="Summary:">
-              <Input value={this.state.form.summary} onChange={this.onChange.bind(this, 'summary')}></Input>
+            <Form.Item label="Excerpt:">
+              <Input value={this.state.form.excerpt} onChange={this.onChange.bind(this, 'excerpt')}></Input>
             </Form.Item>
             <Form.Item label="Category:">
-              <Select value={this.state.form.category} placeholder="Unrecgnized">
+              <Select value={this.state.form.category} placeholder="Unrecgnized" onChange={this.onChange.bind(this, 'category')}>
                 <Select.Option label="Unrecgnized" value="1"></Select.Option>
                 <Select.Option label="Blog" value="2"></Select.Option>
               </Select>
             </Form.Item>
             <Form.Item label="Tags:">
-              <Tags />
+              <Tag value={this.state.form.tags} onChange={this.onChange.bind(this, 'tags')}/>
             </Form.Item>
             <Form.Item label="Cover:">
             <div>
-              <Upload
-                action="//jsonplaceholder.typicode.com/posts/"
-                listType="picture-card"
-                onPreview={file => this.handlePictureCardPreview(file)}
-                onRemove={(file, fileList) => this.handleRemove(file, fileList)}
-              >
-                <i className="el-icon-plus"></i>
-              </Upload>
-              <Dialog
-                visible={dialogVisible}
-                size="tiny"
-                onCancel={() => this.setState({ dialogVisible: false })}
-              >
-                <img width="100%" src={dialogImageUrl} alt="" />
-              </Dialog>
+              <Upload value={this.state.form.cover} 
+                onChange={this.onChange.bind(this, 'cover')}
+                onError={(error) => {
+                  console.error('upload error', error)
+                }}/>
             </div>
             </Form.Item>
             <Form.Item label="Content:">
               <Input type="textarea" rows={10}
-              value={this.state.form.contoent}
                 value={this.state.form.content} onChange={this.onChange.bind(this, 'content')}></Input>
             </Form.Item>
             <Form.Item>

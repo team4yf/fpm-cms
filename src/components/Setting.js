@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import { Layout, Icon, Form, Select, Switch, Checkbox, Button, Input, Radio,
-  Tag,
-  Upload, Dialog, Breadcrumb } from 'element-react';
+import { 
+  Layout, 
+  Breadcrumb,
+  Form, 
+  Select, 
+  Message,
+  Button, 
+  Input,
+} from 'element-react';
 
 class Setting extends Component{
   constructor(props) {
@@ -16,6 +22,12 @@ class Setting extends Component{
 
   onSubmit(e) {
     e.preventDefault();
+    console.info('form data', this.state.form)
+    //TODO: validate & post data to remote server
+    Message({
+      message: 'Saved Success',
+      type: 'success'
+    })
   }
   
   onChange(key, value) {
@@ -41,7 +53,7 @@ class Setting extends Component{
               <Input value={this.state.form.domain} onChange={this.onChange.bind(this, 'domain')}></Input>
             </Form.Item>
             <Form.Item label="Language:">
-              <Select value={this.state.form.lang} placeholder="Language">
+              <Select value={this.state.form.lang} placeholder="Language" onChange={this.onChange.bind(this, 'lang')}>
                 <Select.Option label="EN" value="en"></Select.Option>
                 <Select.Option label="ZH" value="zh"></Select.Option>
               </Select>

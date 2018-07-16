@@ -8,9 +8,12 @@ A CMS System For FPM.
 
 ### RoadMap
 - v0.0.1
-  - [ ] Write Post
-  - [ ] Edit Setting
-  - [ ] Dashboard
+  - [x] Write Post
+    - [x] Edit Tags
+    - [x] Choose Category
+    - [x] Upload Cover
+
+  - [x] Edit Setting
 
 - v0.0.2
   - [ ] RichEditor
@@ -25,12 +28,32 @@ A CMS System For FPM.
 
 - v0.0.5
   - [ ] Metadata
+  - [ ] Dashboard
 
 - v0.1.0
   - [ ] Add fpmc
+  - [ ] Local Language
 
 ### Changelog
+#### v0.0.1
+Add:
+- Generate Some Compose:
+  - <TagInput> 
+    It Used Like `<Tag value={this.state.form.tags} onChange={this.onChange.bind(this, 'tags')}/>`;
 
+    Accept `value` & `onChange`.
+  - <UploadInput>
+    It Used Like
+    ```javascript
+    <Upload value={this.state.form.cover} 
+      onChange={this.onChange.bind(this, 'cover')}
+      onError={(error) => {
+        console.error('upload error', error)
+      }}/>
+    ```
+Feature:
+- Newpost Component
+- Setting Component
 
 ### Snapshots
 - [ ] ..

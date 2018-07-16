@@ -54,3 +54,9 @@ a, a:hover {
 button a{
   color: #fff;
 }
+
+.input-new-tag{
+  display: inline-block;
+  min-width: 30px;
+  max-width: 110px;
+}
