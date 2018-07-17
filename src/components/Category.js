@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { Layout, Card, Icon, Breadcrumb, Tree, Input, Button } from 'element-react';
+import { 
+  Layout, 
+  Breadcrumb,
+  Tree, 
+  Input, 
+  Button 
+} from 'element-react';
 
 class Category extends Component {
   constructor(props) {
@@ -44,8 +50,8 @@ class Category extends Component {
           <span>{data.label}</span>
         </span>
         <span style={{float: 'right', marginRight: '20px'}}>
-          <Button size="mini" onClick={ () => this.append(store, data) }>Append</Button>
-          <Button size="mini" onClick={ () => this.remove(store, data) }>Delete</Button>
+          <Button size="mini" onClick={ () => this.append(store, data) }>+</Button>
+          <Button size="mini" onClick={ () => this.remove(store, data) }>-</Button>
         </span>
       </span>);
   }

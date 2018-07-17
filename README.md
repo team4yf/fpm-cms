@@ -20,11 +20,12 @@ A CMS System For FPM.
     Use `react-draft-wysiwyg`. See At: [https://jpuri.github.io/react-draft-wysiwyg](https://jpuri.github.io/react-draft-wysiwyg)
 
 - v0.0.3
-  - [ ] Remove Tags
+  - [x] Remove Tags
   - [ ] Categorys
     
 - v0.0.4
   - [ ] Comments
+  - [ ] Users
 
 - v0.0.5
   - [ ] Metadata
