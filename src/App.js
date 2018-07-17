@@ -23,7 +23,6 @@ class App extends Component {
             <Menu.Item index="3"><NavLink to="/pages">Page</NavLink></Menu.Item>
             <Menu.Item index="4"><NavLink to="/comments">Comments</NavLink></Menu.Item>
             <Menu.Item index="5"><NavLink to="/category">Category</NavLink></Menu.Item>
-            <Menu.Item index="6"><NavLink to="/tags">Tag</NavLink></Menu.Item>
             <Menu.Item index="7"><NavLink to="/datameta">DataMeta</NavLink></Menu.Item>
             <Menu.Item index="8"><NavLink to="/setting">Setting</NavLink></Menu.Item>
           </Menu>
