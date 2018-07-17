@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "draft-js": "^0.10.5",
+    "draftjs-to-html": "^0.8.4",
     "element-react": "^1.4.20",
     "element-theme-default": "^1.4.13",
+    "html-to-draftjs": "^1.4.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-draft-wysiwyg": "^1.12.13",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4"
   },

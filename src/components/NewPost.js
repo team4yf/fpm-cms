@@ -10,15 +10,23 @@ import {
   Message, 
 } from 'element-react';
 import { Tag, Upload } from './input';
+// for richeditor
+import { EditorState, convertToRaw, convertFromRaw, ContentState } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
 
 class NewPost extends Component {
   constructor(props) {
     super(props);
   
     this.state = {
+      editorState: null,
       dialogImageUrl: '',
       dialogVisible: false,
       form: { 
+        content: undefined,
         url: '/post/1',
         title: 'UnTitled',
         category: '2',
@@ -46,7 +54,19 @@ class NewPost extends Component {
     this.forceUpdate();
   }
 
+  onEditorStateChange = (editorState) =>{
+    console.info(editorState)
+    if(!editorState){
+      return;
+    }
+    this.setState({
+      editorState,
+    });
+    this.onChange('content', draftToHtml(convertToRaw(editorState.getCurrentContent())))
+  };
+
   render() {
+    const { editorState } = this.state;
     return (
       <Layout.Row>
         <div>
@@ -59,7 +79,7 @@ class NewPost extends Component {
         <Layout.Col span="24">
           <h3>New Post</h3>
         </Layout.Col>
-        <Layout.Col span="12">
+        <Layout.Col span="20">
           <Form model={this.state.form} labelWidth="80" onSubmit={this.onSubmit.bind(this)}>
             <Form.Item label="URL:">
               <Input value={this.state.form.url} disabled></Input>
@@ -92,8 +112,12 @@ class NewPost extends Component {
             </div>
             </Form.Item>
             <Form.Item label="Content:">
-              <Input type="textarea" rows={10}
-                value={this.state.form.content} onChange={this.onChange.bind(this, 'content')}></Input>
+              <Editor
+                editorState={editorState}
+                wrapperClassName="demo-wrapper"
+                editorClassName="demo-editor"
+                onEditorStateChange={this.onEditorStateChange}
+              />
             </Form.Item>
             <Form.Item>
               <Button type="primary" nativeType="submit">Post Now</Button>

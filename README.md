@@ -16,19 +16,20 @@ A CMS System For FPM.
   - [x] Edit Setting
 
 - v0.0.2
-  - [ ] RichEditor
-  - [ ] Write Page
+  - [x] RichEditor
+    Use `react-draft-wysiwyg`. See At: [https://jpuri.github.io/react-draft-wysiwyg](https://jpuri.github.io/react-draft-wysiwyg)
 
 - v0.0.3
-  - [ ] Tags
+  - [ ] Remove Tags
   - [ ] Categorys
-
+    
 - v0.0.4
   - [ ] Comments
 
 - v0.0.5
   - [ ] Metadata
   - [ ] Dashboard
+  - [ ] Write Page
 
 - v0.1.0
   - [ ] Add fpmc
