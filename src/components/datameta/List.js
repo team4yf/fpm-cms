@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Layout, Card, Icon, Breadcrumb, Tag, Table, Button, Pagination, Input } from 'element-react';
+import { 
+  Layout, 
+  Breadcrumb, 
+  Table, 
+  Button, 
+  Pagination, 
+  Input,
+  MessageBox,
+  Message,
+} from 'element-react';
 
 class Datameta extends Component {
   constructor(props) {
     super(props);
   
     this.state = {
+      total: 10,
       columns: [
         {
           type: 'index',
@@ -27,11 +37,10 @@ class Datameta extends Component {
         },
         {
             label: '-',
-            render: function(){
+            render: (row, column, index) => {
                 return (
                 <span>
-                    <Button plain={true} type="info" size="mini">Edit</Button>
-                    <Button type="danger" size="mini">Remove</Button>
+                    <Button type="danger" size="mini" onClick={this.onRemove.bind(this, row, index)}>Remove</Button>
                 </span>
                 )
             }
@@ -42,6 +51,35 @@ class Datameta extends Component {
         data: 'Post',
       }]
     }
+  }
+
+  onRemove = (row, index) => {
+    MessageBox.confirm('Are you sure about this?', 'Tip', {
+      type: 'warning'
+    }).then(() => {
+      // TODO: remove one
+      const { data } = this.state;
+      data.splice(index, 1)
+      
+      this.setState({ data })
+      Message({
+        type: 'success',
+        message: 'Ok!'
+      });
+    }).catch(() => {
+      // cancel..
+    });
+  }
+
+  onCreate = () => {
+    MessageBox.prompt('Enter Info', 'Tip' ).then(({ value }) => {
+      // TODO: Save data to remote server
+      const { data } = this.state;
+      data.push({ id: 200, data: value})
+      this.setState({ data })
+    }).catch(() => {
+      // cancel 
+    });
   }
   
   render() {
@@ -55,7 +93,7 @@ class Datameta extends Component {
         </div>
         <Layout.Col span="24">
           <div className="fl">
-            <Button type="success" size="mini">New</Button> 
+            <Button type="success" size="mini" onClick={ this.onCreate }>New</Button> 
           </div>
           <div className="fr">
             <Input
@@ -71,9 +109,7 @@ class Datameta extends Component {
           columns={this.state.columns}
           data={this.state.data}
           border={true}
-          height={600}
         />
-        <Pagination layout="prev, pager, next" total={50} small={true}/>
       </Layout.Row>
    )
   }

@@ -25,7 +25,7 @@ class Edit extends Component {
           },
         {
             label: '-',
-            render: function(){
+            render: () => {
                 return (
                 <span>
                     <Button plain={true} type="info" size="mini">Edit</Button>
@@ -42,6 +42,12 @@ class Edit extends Component {
         form_type: 'Number',
       }]
     }
+  }
+
+  componentDidMount(){
+    // get the param
+    // fetch the data
+    
   }
   
   render() {

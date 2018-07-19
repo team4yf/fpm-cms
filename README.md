@@ -24,11 +24,11 @@ A CMS System For FPM.
   - [ ] Categorys
     
 - v0.0.4
-  - [ ] Comments
+  - [x] Comments
   - [ ] Users
 
 - v0.0.5
-  - [ ] Metadata
+  - [x] Metadata
   - [ ] Dashboard
   - [ ] Write Page
 
