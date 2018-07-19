@@ -14,10 +14,24 @@ class Setting extends Component{
     super(props);
   
     this.state = {
-      form: {
-      }
+      form: { }
     };
 
+  }
+
+  componentDidMount(){
+    // TODO: Fetch remote data
+    const data = {
+      domain: 'http://yunplus.io',
+      lang: 'en',
+      sitecode: 'Babc',
+      email: 'support@yunplus.io',
+      phone: '1377878978',
+
+    }
+    this.setState({
+      form: data,
+    });
   }
 
   onSubmit(e) {

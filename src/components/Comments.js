@@ -1,36 +1,40 @@
 import React, { Component } from 'react';
-import { Layout, Card, Icon, Breadcrumb, Tag, Table, Button, Pagination, Input } from 'element-react';
+import { 
+  Layout,
+  Breadcrumb, 
+  Table, 
+  Button, 
+  Pagination, 
+  Input, 
+  Loading,
+  MessageBox,
+  Message,
+} from 'element-react';
 
 class Comments extends Component {
   constructor(props) {
     super(props);
   
     this.state = {
+      total: 100,
       columns: [
         {
           type: 'index',
           prop: 'id',
+          
         },
         {
-          label: "Title",
-          prop: "title",
+          label: "Post Title",
+          prop: "post_title",
           width: 180
         },
         {
-          label: "Category",
-          prop: "category",
+          label: "Comment",
+          prop: "comment"
         },
         {
           label: "Author",
           prop: "author"
-        },
-        {
-          label: "Viewers",
-          prop: "viewers"
-        },
-        {
-          label: "Comments",
-          prop: "comments"
         },
         {
           label: "State",
@@ -42,27 +46,68 @@ class Comments extends Component {
         },
         {
           label: '-',
-          render: function(){
+          width: 90,
+          render: (row, column, index) => {
             return (
-              <span>
-               <Button plain={true} type="info" size="mini">Edit</Button>
-               <Button type="danger" size="mini">Remove</Button>
-              </span>
+              <Button type="danger" size="mini" onClick={ this.onTrash.bind(this, row, index) }>Trash</Button>
             )
           }
         }
       ],
-      data: [{
-        id: 100,
-        title: 'hello world',
-        category: 'Blog',
+    }
+  }
+
+  onTrash = (row, index) => {
+    MessageBox.confirm('Are you sure about this?', 'Tip', {
+      type: 'warning'
+    }).then(() => {
+      // TODO: remove one
+      // should fetch again
+      const { data, total } = this.state;
+      data.splice(index, 1)
+      
+      this.setState({ data, total: total - 1 })
+      Message({
+        type: 'success',
+        message: 'Ok!'
+      });
+    }).catch(() => {
+      // cancel..
+    });
+  }
+
+  fetch = (page) => {
+    page = page || 1;
+    // TODO: fetch data from remote
+    this.setState({ loading: true });
+    const list = [];
+    for(let i = 0 ; i < 10 ; i++ ){
+      list.push({
+        id: parseInt(page) * 100 + i,
+        post_title: 'hello world',
         author: 'Wangfan',
-        viewers: 100,
-        comments: 200,
+        comment: 'balbalbalbal',
         state: 'published',
         publishat: '2016-05-02',
-      }]
+      })
     }
+    setTimeout(()=>{
+      this.setState({
+        data: list,
+        loading: false,
+      });
+    }, 500);
+    
+  }
+
+  componentDidMount(){
+    
+    this.fetch(1);
+  }
+
+  changePage = (page) => {
+
+    this.fetch(page)
   }
   
   render() {
@@ -86,15 +131,16 @@ class Comments extends Component {
           </div>
         </Layout.Col>
         <div className="cf"></div>
-        <Table
-          style={{width: '100%'}}
-          className="margin-top-10"
-          columns={this.state.columns}
-          data={this.state.data}
-          border={true}
-          height={600}
-        />
-        <Pagination layout="prev, pager, next" total={50} small={true}/>
+        <Loading loading={this.state.loading}>
+          <Table
+            style={{width: '100%'}}
+            className="margin-top-10"
+            columns={this.state.columns}
+            data={this.state.data}
+            border={true}
+          />
+          <Pagination layout="prev, pager, next" small={true} total={ this.state.total } onCurrentChange={ this.changePage } />
+        </Loading>
       </Layout.Row>
    )
   }
