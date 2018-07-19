@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
-import { Layout, Card, Icon, Breadcrumb, Tag, Table, Button, Pagination, Input } from 'element-react';
+import { 
+  Layout, 
+  Breadcrumb, 
+  Table, 
+  Button, 
+  Input,
+  MessageBox,
+  Message,
+} from 'element-react';
 
 class Edit extends Component {
   constructor(props) {
     super(props);
-  
     this.state = {
       columns: [
         {
@@ -40,14 +47,20 @@ class Edit extends Component {
         title: 'SKU',
         column_name: 'sku',
         form_type: 'Number',
-      }]
+      }],
+      title: 'Untitled',
     }
   }
 
   componentDidMount(){
+    const { id } = this.props.match.params;
+    console.info('id', id);
     // get the param
     // fetch the data
-    
+    this.setState({
+      title: 'Post',
+
+    });
   }
   
   render() {
@@ -61,7 +74,7 @@ class Edit extends Component {
           </Breadcrumb>
         </div>
         <Layout.Col span="24">
-          <h3>Modify Datameta [Post]</h3>
+          <h3>Modify Datameta [{ this.state.title }]</h3>
           <div className="fl">
             <Button type="success" size="mini">New</Button> 
           </div>
@@ -79,9 +92,7 @@ class Edit extends Component {
           columns={this.state.columns}
           data={this.state.data}
           border={true}
-          height={600}
         />
-        <Pagination layout="prev, pager, next" total={50} small={true}/>
       </Layout.Row>
    )
   }
