@@ -11,11 +11,7 @@ import {
 } from 'element-react';
 import { Tag, Upload } from './input';
 // for richeditor
-import { EditorState, convertToRaw, convertFromRaw, ContentState } from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
+import Editor from 'wangeditor'
 
 class NewPost extends Component {
   constructor(props) {
@@ -54,16 +50,19 @@ class NewPost extends Component {
     this.forceUpdate();
   }
 
-  onEditorStateChange = (editorState) =>{
-    console.info(editorState)
-    if(!editorState){
-      return;
+  componentDidMount() {
+    const elem = this.refs.editorElem
+    const editor = new Editor(elem)
+    // TODO: change upload
+    editor.customConfig.uploadImgServer = '/upload'
+    editor.customConfig.onchange = html => {
+      this.setState({
+        editorState: html
+      })
+      this.onChange('content', html)
     }
-    this.setState({
-      editorState,
-    });
-    this.onChange('content', draftToHtml(convertToRaw(editorState.getCurrentContent())))
-  };
+    editor.create()
+  }
 
   render() {
     const { editorState } = this.state;
@@ -112,12 +111,8 @@ class NewPost extends Component {
             </div>
             </Form.Item>
             <Form.Item label="Content:">
-              <Editor
-                editorState={editorState}
-                wrapperClassName="demo-wrapper"
-                editorClassName="demo-editor"
-                onEditorStateChange={this.onEditorStateChange}
-              />
+            <div ref="editorElem" style={{textAlign: 'left'}}></div>
+              
             </Form.Item>
             <Form.Item>
               <Button type="primary" nativeType="submit">Post Now</Button>
