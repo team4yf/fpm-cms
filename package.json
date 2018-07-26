@@ -12,7 +12,8 @@
     "react-dom": "^16.4.1",
     "react-draft-wysiwyg": "^1.12.13",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "wangeditor": "^3.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

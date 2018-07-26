@@ -18,6 +18,11 @@ A CMS System For FPM.
 - v0.0.2
   - [x] RichEditor
     Use `react-draft-wysiwyg`. See At: [https://jpuri.github.io/react-draft-wysiwyg](https://jpuri.github.io/react-draft-wysiwyg)
+    - [ ] WangEditor
+      [https://www.kancloud.cn/wangfupeng/wangeditor3/335788](https://www.kancloud.cn/wangfupeng/wangeditor3/335788)
+      This Maybe Better
+      
+    
 
 - v0.0.3
   - [x] Remove Tags
