@@ -17,7 +17,7 @@ A CMS System For FPM.
 
 - v0.0.2
   - [x] RichEditor
-    Use `react-draft-wysiwyg`. See At: [https://jpuri.github.io/react-draft-wysiwyg](https://jpuri.github.io/react-draft-wysiwyg)
+    ~Use `react-draft-wysiwyg`. See At: [https://jpuri.github.io/react-draft-wysiwyg](https://jpuri.github.io/react-draft-wysiwyg)~
     - [ ] WangEditor
       [https://www.kancloud.cn/wangfupeng/wangeditor3/335788](https://www.kancloud.cn/wangfupeng/wangeditor3/335788)
       This Maybe Better
@@ -43,8 +43,14 @@ A CMS System For FPM.
 
 ### Changelog
 #### v0.0.1
+Change:
+- Replace `wangEditor` to `draft-js`
+  it's better.
 Add:
-- Generate Some Compose:
+- Generate Some Components:
+  - <TreeSelector>
+    It Used Like `<TreeSelector value={this.state.form.category} onChange={this.onChange.bind(this, 'category')} />`;
+    the `value` should be sort of `1-1-1`.
   - <TagInput> 
     It Used Like `<Tag value={this.state.form.tags} onChange={this.onChange.bind(this, 'tags')}/>`;
 

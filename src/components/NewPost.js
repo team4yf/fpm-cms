@@ -9,7 +9,7 @@ import {
   Breadcrumb,
   Message, 
 } from 'element-react';
-import { Tag, Upload } from './input';
+import { Tag, Upload, TreeSelector } from './input';
 // for richeditor
 import Editor from 'wangeditor'
 
@@ -25,7 +25,7 @@ class NewPost extends Component {
         content: undefined,
         url: '/post/1',
         title: 'UnTitled',
-        category: '2',
+        category: 'zujian-basic-color',
         tags: 'Tag A, Tag DDDD'.split(','),
         cover: [
           {name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg'}, 
@@ -48,6 +48,9 @@ class NewPost extends Component {
   onChange(key, value) {
     this.state.form[key] = value;
     this.forceUpdate();
+    if(key == 'category'){
+      console.info(value)
+    }
   }
 
   componentDidMount() {
@@ -93,10 +96,9 @@ class NewPost extends Component {
               <Input value={this.state.form.excerpt} onChange={this.onChange.bind(this, 'excerpt')}></Input>
             </Form.Item>
             <Form.Item label="Category:">
-              <Select value={this.state.form.category} placeholder="Unrecgnized" onChange={this.onChange.bind(this, 'category')}>
-                <Select.Option label="Unrecgnized" value="1"></Select.Option>
-                <Select.Option label="Blog" value="2"></Select.Option>
-              </Select>
+              <TreeSelector
+                value={this.state.form.category}
+                onChange={this.onChange.bind(this, 'category')} />
             </Form.Item>
             <Form.Item label="Tags:">
               <Tag value={this.state.form.tags} onChange={this.onChange.bind(this, 'tags')}/>

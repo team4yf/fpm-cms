@@ -7,36 +7,46 @@ import {
   Input,
   MessageBox,
   Message,
+  Select,
+  Dialog,
+  Form,
+  Switch,
 } from 'element-react';
 
 class Edit extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      editDialogVisible: false,
+      form: {},
       columns: [
         {
           type: 'index',
           prop: 'id',
-        },
-        {
+        },{
           label: "Title",
           prop: "title",
-        },
-        {
+        },{
           label: "Column Name",
           prop: 'column_name'
-        },
-        {
-            label: "Form Type",
-            prop: 'form_type'
-          },
-        {
+        },{
+          label: "Form Type",
+          prop: 'form_type'
+        },{
+          label: "Required",
+          prop: 'required',
+          render: (row, column, index)  => {
+            return (
+              <span>{ row['required'] === 1 ? 'Yes': 'No' }</span>
+            )
+          }
+        },{
             label: '-',
-            render: () => {
+            render: (row, column, index)  => {
                 return (
                 <span>
                     <Button plain={true} type="info" size="mini">Edit</Button>
-                    <Button type="danger" size="mini">Remove</Button>
+                    <Button type="danger" size="mini" onClick={this.onRemove.bind(this, row, index)}>Remove</Button>
                 </span>
                 )
             }
@@ -47,6 +57,7 @@ class Edit extends Component {
         title: 'SKU',
         column_name: 'sku',
         form_type: 'Number',
+        required: 1,
       }],
       title: 'Untitled',
     }
@@ -62,7 +73,44 @@ class Edit extends Component {
 
     });
   }
+
+  onRemove = (row, index) => {
+    MessageBox.confirm('Are you sure about this?', 'Tip', {
+      type: 'warning'
+    }).then(() => {
+      // TODO: remove one
+      const { data } = this.state;
+      data.splice(index, 1)
+      
+      this.setState({ data })
+      Message({
+        type: 'success',
+        message: 'Ok!'
+      });
+    }).catch(() => {
+      // cancel..
+    });
+  }
   
+  onSubmit(e) {
+    e.preventDefault();
+    console.info(this.state.form)
+    this.setState({ editDialogVisible: false })
+    //TODO: validate & save data to remote
+    const { data } = this.state
+    data.push(this.state.form)
+    this.setState({data, form: {}})
+    Message({
+      message: 'Create Success',
+      type: 'success'
+    });
+  }
+  
+  onChange(key, value) {
+    this.state.form[key] = value;
+    this.forceUpdate();
+  }
+
   render() {
     return (
       <Layout.Row>
@@ -76,7 +124,7 @@ class Edit extends Component {
         <Layout.Col span="24">
           <h3>Modify Datameta [{ this.state.title }]</h3>
           <div className="fl">
-            <Button type="success" size="mini">New</Button> 
+            <Button type="success" size="mini" onClick={ () => this.setState({ editDialogVisible: true }) }>New</Button> 
           </div>
           <div className="fr">
             <Input
@@ -93,6 +141,44 @@ class Edit extends Component {
           data={this.state.data}
           border={true}
         />
+
+        <Dialog
+          title="Edit"
+          visible={ this.state.editDialogVisible }
+          onCancel={ () => this.setState({ editDialogVisible: false }) }
+        >
+          <Dialog.Body>
+            <Form model={this.state.form} labelWidth="120" onSubmit={ this.onSubmit.bind(this) }>
+              <Form.Item label="Title">
+                <Input value={this.state.form.title} onChange={this.onChange.bind(this, 'title')}></Input>
+              </Form.Item>
+              <Form.Item label="Name">
+                <Input value={this.state.form.column_name} onChange={this.onChange.bind(this, 'column_name')}></Input>
+              </Form.Item>
+              <Form.Item label="Required">
+                <Switch
+                  value={this.state.form.required} onChange={this.onChange.bind(this, 'required')}
+                  onValue={1}
+                  onText={'Yes'}
+                  offValue={0}
+                  offText={'No'}>
+                </Switch>
+              </Form.Item>
+              
+              <Form.Item label="FormType">
+                <Select value={this.state.form.form_type} placeholder="Text/Select/Image" onChange={this.onChange.bind(this, 'form_type')}>
+                  <Select.Option label="Text" value="text"></Select.Option>
+                  <Select.Option label="Select" value="select"></Select.Option>
+                  <Select.Option label="Image" value="image"></Select.Option>
+                </Select>
+              </Form.Item>
+              <Form.Item>
+                <Button type="primary" nativeType="submit">Ok</Button>
+                <Button onClick={ () => this.setState({ editDialogVisible: false }) }>Cancel</Button>
+              </Form.Item>
+            </Form>
+          </Dialog.Body>
+        </Dialog>
       </Layout.Row>
    )
   }
